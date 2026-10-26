@@ -34,3 +34,10 @@ The trade-off: close is synchronous. `close()` on the underlying resource is ass
 - Releasing a reference more than once throws. A double-release almost always means a consumer lost track of its lifecycle; failing loudly catches that at the source rather than silently under-counting and leaking the descriptor.
 - Acquiring on an already-closed handle throws. The descriptor is gone; handing out a new reference against it would be a lie.
 - After close, `get()` returns `undefined` rather than throwing. Teardown paths that check `if (handle.get())` keep working without try/catch noise.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
