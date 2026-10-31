@@ -1,6 +1,6 @@
 {
   "name": "file-handle-reference-counter",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "File handle wrapper that uses reference counting to let multiple consumers share one descriptor and close it safely.",
   "type": "module",
   "main": "src/index.js",
